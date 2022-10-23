@@ -1,4 +1,6 @@
-<a href="{{route('posts.create')}}">Сделать пост</a>
+@extends('layout')
+@section('content')
+<a class="btn btn-secondary btn-sm" href="{{route('posts.create')}}" role="button" >Сделать пост</a>
 <table>
 @foreach ($posts as $post)
         <tr>
@@ -9,3 +11,4 @@
     
 @endforeach
 </table>
+@endsection
