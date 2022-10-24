@@ -1,6 +1,7 @@
 @extends('layout')
 @section('content')
 <div>
+    <a class="btn btn-light" href="{{route('posts.index')}}" role="button" >Вернуться к постам</a>
     <form action="{{ route('posts.store') }}" method="POST">
         @csrf
         <p><b>Имя автора:</b></p>
