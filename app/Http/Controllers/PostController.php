@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
-use App\Services\PostService;;
+use App\Services\PostService;
 
 class PostController extends Controller
 {
@@ -13,7 +13,7 @@ class PostController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function index()
+    public function index(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
         $posts=Post::all();
         return view('welcome',compact('posts'));
@@ -24,7 +24,7 @@ class PostController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function create()
+    public function create(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
         return view('form_create');
     }
@@ -35,14 +35,16 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request, PostService $service)
+    public function store(Request $request, PostService $service): \Illuminate\Http\RedirectResponse
     {
+        return $service->PostStore($request);
+        /*
         $newPost= new Post();
         $newPost->author=$request->name;
         $newPost->title=$request->title;
         $newPost->text=$request->text;
         $newPost->save();
-        return redirect()->route("posts.index");
+        return redirect()->route("posts.index");*/
     }
 
     /**
@@ -51,7 +53,7 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function show($id)
+    public function show(int $id): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
         $post=Post::find($id);
         return view('show',compact('post'));
@@ -63,7 +65,7 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function edit($id)
+    public function edit(int $id)
     {
         $post=Post::find($id);
         return view('edit_form',compact('post'));
@@ -76,14 +78,16 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id, PostService $service)
+    public function update(Request $request, int $id, PostService $service)
     {
+        return $service->PostUpdate($request,$id);
+        /*
         $post=Post::find($id);
         $post->author=$request->name;
         $post->title=$request->title;
         $post->text=$request->text;
         $post->save();
-        return redirect()->route("posts.index");
+        return redirect()->route("posts.index");*/
     }
 
     /**
@@ -92,9 +96,8 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy($id, PostService $service)
+    public function destroy(int $id, PostService $service)
     {
-        Post::destroy($id);
-        return redirect()->route("posts.index");
+        return $service->PostDestroy($id);
     }
 }

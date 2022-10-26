@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class PostService
 {
-    public function PostUpdate(Request $request, $id)
+    public function PostUpdate(Request $request)
     {
         $post=Post::find($id);
         $post->author=$request->name;
@@ -18,7 +18,7 @@ class PostService
     }
 
     public function PostStore(Request $request): \Illuminate\Http\RedirectResponse
-    {
+    {//TODO CATCH THE NULL FIELD IN FORM
         $newPost= new Post();
         $newPost->author=$request->name;
         $newPost->title=$request->title;
