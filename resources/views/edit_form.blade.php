@@ -4,6 +4,7 @@
     <a class="btn btn-light btn-sm" href="{{route('posts.index')}}" role="button" >Вернуться к постам</a>
     <form action="{{ route('posts.update',$post->id) }}" method="POST">
         @csrf
+        @method('PATCH')
         <p><b>Имя автора:</b></p>
         <input type="text" size="40" name="name" value="{{$post->author}}">
         <p><b>Заголовок статьи:</b></p>
@@ -12,5 +13,5 @@
         <textarea name="text" id="" cols="30" rows="10">{{$post->text}}</textarea>
         <p><button type="submit" class="btn btn-success">Обновить</button></p>
     </form>
-</div> 
+</div>
 @endsection
