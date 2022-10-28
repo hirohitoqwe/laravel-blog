@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class PostService
 {
-    public function PostUpdate(Request $request)
+    public function PostUpdate(Request $request,int $id)
     {
         $post=Post::find($id);
         $post->author=$request->name;

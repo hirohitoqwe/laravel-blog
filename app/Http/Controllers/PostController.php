@@ -8,6 +8,11 @@ use App\Services\PostService;
 
 class PostController extends Controller
 {
+
+    public function __construct(private readonly PostService $service){
+
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -35,16 +40,9 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request, PostService $service): \Illuminate\Http\RedirectResponse
+    public function store(Request $request): \Illuminate\Http\RedirectResponse
     {
-        return $service->PostStore($request);
-        /*
-        $newPost= new Post();
-        $newPost->author=$request->name;
-        $newPost->title=$request->title;
-        $newPost->text=$request->text;
-        $newPost->save();
-        return redirect()->route("posts.index");*/
+        return $this->service->PostStore($request);
     }
 
     /**
@@ -78,16 +76,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, int $id, PostService $service)
+    public function update(Request $request, int $id)
     {
-        return $service->PostUpdate($request,$id);
-        /*
-        $post=Post::find($id);
-        $post->author=$request->name;
-        $post->title=$request->title;
-        $post->text=$request->text;
-        $post->save();
-        return redirect()->route("posts.index");*/
+        return $this->service->PostUpdate($request,$id);
     }
 
     /**
@@ -96,8 +87,8 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(int $id, PostService $service)
+    public function destroy(int $id)
     {
-        return $service->PostDestroy($id);
+        return $this->service->PostDestroy($id);
     }
 }
