@@ -2,21 +2,21 @@
 @section('content')
 <a class="btn btn-secondary btn-sm" href="{{route('posts.create')}}" role="button" >Сделать пост</a>
 <table class="table">
-    <thead>
+    <tbody>
         <tr>
             <td>ID</td>
-            <td>Author</td>
             <td>Title</td>
             <td>Text</td>
+            <td>Author</td>
         </tr>
-    </thead>
+    </tbody>
     <tbody>
 @foreach ($posts as $post)
         <tr>
             <td><a href="{{route('posts.show',$post->id)}}">{{$post->id}}</a></td>
-            <td>{{$post->author}}</td>
             <td>{{$post->title}}</td>
             <td>{{$post->text}}</td>
+            <td>{{$post->author}}</td>
             <td><a class="btn btn-info btn-sm" href="{{route('posts.edit',$post->id)}}" role="button" >Обновить</a></td>
             <td><form method="POST" action="{{route('posts.destroy',$post->id)}}">
                 @csrf

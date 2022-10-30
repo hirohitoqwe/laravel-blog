@@ -10,13 +10,18 @@
         <textarea name="text" id="" cols="30" rows="10">{{$post->text}}</textarea>
     </div>
     <div style="padding-top:60px">
-        <form action="{{}}" method="POST"><!---comment--->
+        <form action="{{route('comment.store',$post->id)}}" method="POST"><!---comment--->
             @csrf
-            <p><b>Имя:</b></p>
-            <input type="text" size="40" name="name">
             <p><b>Комментарий:</b></p>
-            <input type="text" size="40" name="title">
+            <p><input type="text" size="40" name="title">   </p>
             <p><button type="submit" class="btn btn-success">Отправить</button></p>
         </form>
+    </div>
+    <div>
+        @foreach($comments as $comment)
+            <div style="background: #E0E0E0;margin: 10px;height: 60px">
+                {{$comment->text}}
+            </div>
+        @endforeach
     </div>
 @endsection

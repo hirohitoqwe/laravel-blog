@@ -54,7 +54,13 @@ class PostController extends Controller
     public function show(int $id): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
         $post=Post::find($id);
-        return view('show',compact('post'));
+        $comments=$post->comments()->get();
+        /*
+        foreach ($comments as $cm){
+            dd($cm->text);
+        }
+        dd();*/
+        return view('show',compact('post','comments'));
     }
 
     /**
