@@ -20,9 +20,9 @@ class PostService
     public function PostStore(Request $request): \Illuminate\Http\RedirectResponse
     {//TODO CATCH THE NULL FIELD IN FORM
         $newPost= new Post();
-        $newPost->author=$request->name;
-        $newPost->title=$request->title;
-        $newPost->text=$request->text;
+        $newPost->author=htmlspecialchars($request->name);
+        $newPost->title=htmlspecialchars($request->title);
+        $newPost->text=htmlspecialchars($request->text);
         $newPost->save();
         return redirect()->route("posts.index");
     }
