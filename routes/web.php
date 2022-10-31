@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use \App\Http\Controllers\CommentController;
@@ -15,6 +16,8 @@ use \App\Http\Controllers\CommentController;
 */
 Route::post('/posts/{post}/comment',[CommentController::class,'store'])->name('comment.store');
 Route::resource('posts',PostController::class);
-Route::get('/',function () {
-    return redirect('/posts');
-});
+Route::get('/',[\App\Http\Controllers\HomeController::class,'index']);
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

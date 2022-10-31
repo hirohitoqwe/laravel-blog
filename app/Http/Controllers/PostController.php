@@ -21,7 +21,7 @@ class PostController extends Controller
     public function index(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
         $posts=Post::paginate(30);
-        return view('welcome',compact('posts'));
+        return view('posts',compact('posts'));
     }
 
     /**

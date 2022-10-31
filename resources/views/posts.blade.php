@@ -1,5 +1,9 @@
 @extends('layout')
 @section('content')
+    <div class="mb-2" >
+        <a class="btn btn-secondary btn-sm" href="{{route('home')}}" role="button">Ваш профиль</a>
+
+    </div>
 <a class="btn btn-secondary btn-sm" href="{{route('posts.create')}}" role="button" >Сделать пост</a>
 <table class="table">
     <tbody>
