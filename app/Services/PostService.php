@@ -3,6 +3,7 @@ namespace App\Services;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 
 class PostService
@@ -23,8 +24,9 @@ class PostService
         $newPost->author=htmlspecialchars($request->name);
         $newPost->title=htmlspecialchars($request->title);
         $newPost->text=htmlspecialchars($request->text);
+        $newPost->user_id=htmlspecialchars(Auth::user()->id);
         $newPost->save();
-        return redirect()->route("posts.index");
+        return redirect()->route('home');
     }
 
     public function PostDestroy($id){
