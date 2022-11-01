@@ -15,7 +15,7 @@ class PostService
         $post->title=$request->title;
         $post->text=$request->text;
         $post->save();
-        return redirect()->route("posts.index");
+        return redirect()->route("home");
     }
 
     public function PostStore(Request $request): \Illuminate\Http\RedirectResponse
@@ -31,7 +31,7 @@ class PostService
 
     public function PostDestroy($id){
         Post::destroy($id);
-        return redirect()->route("posts.index");
+        return redirect()->route("home");
     }
 
 }

@@ -17,9 +17,9 @@ class Post extends Model
     public function comments(){
         return $this->hasMany(Comment::class,'post_id','id');
     }
-
+    /*
     public function author(){//TODO test this
         return $this->belongsTo(User::class,'user_id','id');
-    }
+    }*/
 
 }

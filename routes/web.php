@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use \App\Http\Controllers\CommentController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,11 +15,10 @@ use \App\Http\Controllers\CommentController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::post('/posts/{post}/comment',[CommentController::class,'store'])->name('comment.store');
-Route::resource('posts',PostController::class);
-Route::get('/',[\App\Http\Controllers\HomeController::class,'index']);
-
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Auth::routes();
+Route::middleware('auth')->group(function () {
+    Route::post('/posts/{post}/comment', [CommentController::class, 'store'])->name('comment.store');
+    Route::resource('posts', PostController::class);
+});
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
