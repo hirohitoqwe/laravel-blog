@@ -8,9 +8,8 @@ use App\Services\PostService;
 
 class PostController extends Controller
 {
-
     public function __construct(private readonly PostService $service){
-
+        $this->middleware('auth')->except(['index','show']);
     }
 
     /**

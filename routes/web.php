@@ -15,10 +15,12 @@ use \App\Http\Controllers\CommentController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\PostController::class, 'index']);
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Auth::routes();
-Route::middleware('auth')->group(function () {
+Route::resource('posts', PostController::class);
+Route::post('/posts/{post}/comment', [CommentController::class, 'store'])->name('comment.store')->middleware('auth');
+/*Route::middleware('auth')->group(function () {
     Route::post('/posts/{post}/comment', [CommentController::class, 'store'])->name('comment.store');
-    Route::resource('posts', PostController::class);
-});
+});*/
 
