@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Comment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 
 class CommentService
@@ -13,6 +14,7 @@ class CommentService
         try {
             if (!empty($title)){
                 $comment=new Comment();
+                $comment->name=Auth::user()->name;
                 $comment->text=htmlspecialchars($title);
                 $comment->post_id=$id;
                 $comment->save();
