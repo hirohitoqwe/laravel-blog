@@ -4,9 +4,9 @@
         <a class="btn btn-light btn-sm" href="{{route('posts.index')}}" role="button">Вернуться к постам</a>
         <p><b>Имя автора:</b></p>
         <input type="text" size="40" name="name" value="{{$post->author}}">
-        <p><b>Заголовок статьи:</b></p>
+        <p><b>Заголовок поста:</b></p>
         <input type="text" size="40" name="title" value="{{$post->title}}">
-        <p><b>Текст статьи:</b></p>
+        <p><b>Текст поста:</b></p>
         <textarea name="text" id="" cols="30" rows="10">{{$post->text}}</textarea>
     </div>
     <div style="padding-top:60px;">
@@ -18,6 +18,14 @@
                 <button type="submit" class="btn btn-success">Отправить</button>
             </p>
         </form>
+        @if (session('emptyCommentField'))
+            @php
+                Session::forget('emptyCommentField');
+            @endphp
+            <div class="alert alert-danger" role="alert">
+                Вы хотите отправить пустой комментарий!
+            </div>
+        @endif
     </div>
     <div>
         @foreach($comments as $comment)

@@ -34,7 +34,8 @@ class PostService
             }else{
                 throw new \Exception('Empty post field');
             }
-        }catch (Exception $e){
+        }catch (\Exception $e){
+            session(['emptyPostFields'=>1]);
             return redirect()->route('posts.create');
         }
 

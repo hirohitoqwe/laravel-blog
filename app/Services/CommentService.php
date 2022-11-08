@@ -23,8 +23,8 @@ class CommentService
                 throw new \Exception('Empty title');
             }
         }catch (\Exception $e){
-            echo $e->getMessage();
+            session(['emptyCommentField'=>1]);
+            return redirect()->route('posts.show',$id);
         }
-
     }
 }

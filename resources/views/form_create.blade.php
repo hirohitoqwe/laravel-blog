@@ -13,5 +13,11 @@
         <textarea name="text" id="" cols="30" rows="10"></textarea>
         <p><button type="submit" class="btn btn-success">Сохранить</button></p>
     </form>
+    @if (session('emptyPostFields'))
+        @php Session::forget('emptyPostFields') @endphp
+        <div class="alert alert-danger" role="alert">
+            Какие-то поля не были заполнены!
+        </div>
+    @endif
 </div>
 @endsection
