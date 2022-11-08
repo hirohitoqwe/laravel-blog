@@ -12,7 +12,7 @@ class CommentService
     public function storeComment(Request $request,$id){
         $title=$request->title;
         try {
-            if (!empty($title)){
+            if (isset($title)){
                 $comment=new Comment();
                 $comment->name=Auth::user()->name;
                 $comment->text=htmlspecialchars($title);
