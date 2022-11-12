@@ -3,11 +3,11 @@
     <div>
         <a class="btn btn-light btn-sm" href="{{route('posts.index')}}" role="button">Вернуться к постам</a>
         <p><b>Имя автора:</b></p>
-        <input type="text" size="40" name="name" value="{{$post->author}}">
+        <input type="text" size="40" name="name" value="{{$post->author}}" readonly="readonly">
         <p><b>Заголовок поста:</b></p>
-        <input type="text" size="40" name="title" value="{{$post->title}}">
+        <input type="text" size="40" name="title" value="{{$post->title}}" readonly="readonly">
         <p><b>Текст поста:</b></p>
-        <textarea name="text" id="" cols="30" rows="10">{{$post->text}}</textarea>
+        <textarea name="text" id="" cols="30" rows="10" readonly="readonly">{{$post->text}} </textarea>
     </div>
     <div style="padding-top:60px;">
         <form action="{{route('comment.store',$post->id)}}" method="POST"><!---comment--->
