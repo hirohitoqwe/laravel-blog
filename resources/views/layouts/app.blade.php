@@ -72,6 +72,11 @@
                                 <a class="dropdown-item" href="{{ route('posts.index') }}">
                                     {{ __('Перейти к постам') }}
                                 </a>
+                                @if(\Illuminate\Support\Facades\Auth::user()->is_admin)
+                                    <a class="dropdown-item" href="{{ route('admin') }}">
+                                        {{ __('Перейти в админку') }}
+                                    </a>
+                                @endif
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

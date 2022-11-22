@@ -54,11 +54,6 @@ class PostController extends Controller
     {
         $post=Post::find($id);
         $comments=$post->comments()->get();
-        /*
-        foreach ($comments as $cm){
-            dd($cm->text);
-        }
-        dd();*/
         return view('show',compact('post','comments'));
     }
 
