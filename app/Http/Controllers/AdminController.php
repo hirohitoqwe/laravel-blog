@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\User;
 use App\Services\AdminService;
 use Illuminate\Http\Request;
 
@@ -46,6 +47,17 @@ class AdminController extends Controller
     public function destroy(int $id)
     {
         return $this->service->PostDelete($id);
+    }
+
+    public function users()
+    {
+        $users = User::all()->where('is_admin','=',false);
+        return view('admin.admin_users', compact('users'));
+    }
+
+    public function userDelete($id)
+    {
+        return $this->service->UserDelete($id);
     }
 
 }

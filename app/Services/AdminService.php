@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AdminService
@@ -22,4 +23,11 @@ class AdminService
         Post::destroy($id);
         return redirect()->route("admin");
     }
+
+    public function UserDelete($id): \Illuminate\Http\RedirectResponse
+    {
+        User::destroy($id);
+        return redirect()->route("admin.users");
+    }
+
 }
