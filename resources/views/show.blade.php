@@ -9,6 +9,25 @@
         <p><b>Текст поста:</b></p>
         <textarea name="text" id="" cols="30" rows="10" readonly="readonly">{{$post->text}} </textarea>
     </div>
+    @php
+        $count=\App\Models\UserLike::where('post_id','=',$post->id)->get()->count();
+        $flag=\App\Models\UserLike::where('post_id','=',$post->id)->where('user_id','=',auth()->user()->id)->get()->count();
+    @endphp
+    <div class="pb-0">
+        <form method="POST" action="{{route('post.like',$post->id)}}">
+            @csrf
+            @if ($flag)
+                <button type="submit" class="border-0 bg-transparent">
+                    <i class="bi bi-heart-fill">{{$count}}</i>
+                </button>
+            @else
+                <button type="submit" class="border-0 bg-transparent">
+                    <i class="bi bi-heart">{{$count}}</i>
+                </button>
+            @endif
+        </form>
+
+    </div>
     <div style="padding-top:60px;">
         <form action="{{route('comment.store',$post->id)}}" method="POST"><!---comment--->
             @csrf
@@ -27,6 +46,7 @@
             </div>
         @endif
     </div>
+
     <div>
         @foreach($comments as $comment)
             <div> {{$comment->name}}</div>

@@ -24,6 +24,7 @@ Route::middleware(['auth', 'admin'])->prefix("admin")->group(function () {
     Route::get('/users', [AdminController::class, 'users'])->name('admin.users');
     Route::delete('/users/{user}', [AdminController::class, 'userDelete'])->name('admin.user.delete');
 });
+Route::post('/like/{postId}',[\App\Http\Controllers\LikeController::class,'like'])->name('post.like');
 Route::get('/', [App\Http\Controllers\PostController::class, 'index']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Auth::routes();
