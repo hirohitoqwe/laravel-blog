@@ -23,12 +23,14 @@ Route::middleware(['auth', 'admin'])->prefix("admin")->group(function () {
     Route::delete('/{id}', [AdminController::class, 'destroy'])->name('admin.destroy');
     Route::get('/users', [AdminController::class, 'users'])->name('admin.users');
     Route::delete('/users/{user}', [AdminController::class, 'userDelete'])->name('admin.user.delete');
+
 });
-Route::post('/like/{postId}',[\App\Http\Controllers\LikeController::class,'like'])->name('post.like');
+
 Route::get('/', [App\Http\Controllers\PostController::class, 'index']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Auth::routes();
 Route::resource('posts', PostController::class);
 Route::post('/posts/{post}/comment', [CommentController::class, 'store'])->name('comment.store')->middleware('auth');
+Route::post('/like/{postId}',[\App\Http\Controllers\LikeController::class,'like'])->name('post.like')->middleware('auth');
 
 

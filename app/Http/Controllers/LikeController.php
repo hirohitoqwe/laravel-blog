@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\UserLike;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 class LikeController extends Controller
 {
     public function like($id)

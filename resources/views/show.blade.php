@@ -10,8 +10,11 @@
         <textarea name="text" id="" cols="30" rows="10" readonly="readonly">{{$post->text}} </textarea>
     </div>
     @php
+        $flag=false;
         $count=\App\Models\UserLike::where('post_id','=',$post->id)->get()->count();
-        $flag=\App\Models\UserLike::where('post_id','=',$post->id)->where('user_id','=',auth()->user()->id)->get()->count();
+        if (auth()->user()){
+            $flag=\App\Models\UserLike::where('post_id','=',$post->id)->where('user_id','=',auth()->user()->id)->get()->count();
+        }
     @endphp
     <div class="pb-0">
         <form method="POST" action="{{route('post.like',$post->id)}}">
