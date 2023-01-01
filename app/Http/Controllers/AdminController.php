@@ -51,13 +51,18 @@ class AdminController extends Controller
 
     public function users()
     {
-        $users = User::all()->where('is_admin','=',false);
+        $users = User::all()->where('is_admin', '=', false);
         return view('admin.admin_users', compact('users'));
     }
 
     public function userDelete($id)
     {
         return $this->service->UserDelete($id);
+    }
+
+    public function commentDelete(int $id,Request $request)
+    {
+        return $this->service->commentDelete($id,$request);
     }
 
 }

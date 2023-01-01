@@ -1,16 +1,5 @@
-@extends('layout')
+@extends('layouts.app')
 @section('content')
-    @auth
-        <div class="container m-0 p-1">
-            <a class="btn btn-secondary btn-sm m-lg-1" href="{{route('home')}}" role="button">Ваш профиль</a>
-            <a class="btn btn-secondary btn-sm m-lg-1" href="{{route('posts.create')}}" role="button">Сделать пост</a>
-        </div>
-    @endauth
-    @guest
-        <div class="container m-0 p-1">
-            <a class="btn btn-secondary btn-sm m-lg-1" href="{{route('login')}}" role="button">Логин</a>
-        </div>
-    @endguest
     <table class="table">
         <tbody>
         <tr>
