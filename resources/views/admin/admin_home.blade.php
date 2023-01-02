@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
-    <p><a class="btn btn-secondary btn-sm" href="{{route('admin.users')}}" role="button">Администрирование пользователей</a></p>
+    <p><a class="btn btn-secondary btn-sm" href="{{route('admin.users')}}" role="button">Пользователи</a></p>
+    <p><a class="btn btn-secondary btn-sm" href="{{route('admin.stats')}}" role="button">Статистика сайта</a></p>
     <table class="table">
         <thead>
         <th scope="col">ID</th>

@@ -60,9 +60,15 @@ class AdminController extends Controller
         return $this->service->UserDelete($id);
     }
 
-    public function commentDelete(int $id,Request $request)
+    public function commentDelete(int $id, Request $request)
     {
-        return $this->service->commentDelete($id,$request);
+        return $this->service->commentDelete($id, $request);
     }
+
+    public function stats()
+    {
+        return $this->service->stats();
+    }
+
 
 }

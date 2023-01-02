@@ -57,7 +57,7 @@
                 style="background: #E0E0E0;margin-bottom:10px;margin-top:1px ;width: 1080px;display: inline-block;vertical-align: top;">
                 {{$comment->text}}
                 @if (auth()->user()->is_admin)
-                    <div>
+                    <div style="text-align:right">
                         <form method="POST" action="{{route('admin.comment.delete',$comment->id)}}" class="px-3">
                             @csrf
                             @method('DELETE')

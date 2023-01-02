@@ -70,11 +70,11 @@
 
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ route('posts.index') }}">
-                                    {{ __('Перейти к постам') }}
+                                    {{ __('Posts') }}
                                 </a>
                                 @if(\Illuminate\Support\Facades\Auth::user()->is_admin)
                                     <a class="dropdown-item" href="{{ route('admin') }}">
-                                        {{ __('Перейти в админку') }}
+                                        {{ __('Admin-panel') }}
                                     </a>
                                 @endif
                                 <a class="dropdown-item" href="{{ route('logout') }}"

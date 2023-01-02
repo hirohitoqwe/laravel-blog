@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Services\AdminService;
+use App\Services\CalculateService;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
@@ -16,7 +17,11 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(AdminService::class, function ($app) {
-            return new AdminService();
+            return new AdminService(new CalculateService());
+        });
+
+        $this->app->bind(CalculateService::class, function ($app) {
+            return new CalculateService();
         });
     }
 

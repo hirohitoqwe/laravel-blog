@@ -9,6 +9,9 @@ use Illuminate\Http\Request;
 
 class AdminService
 {
+
+    public function __construct(private readonly CalculateService $service){}
+
     public function postUpdate(Request $request, int $id): \Illuminate\Http\RedirectResponse
     {
         $post = Post::find($id);
@@ -31,10 +34,19 @@ class AdminService
         return redirect()->route("admin.users");
     }
 
-    public function commentDelete(int $id,Request $request)
+    public function commentDelete(int $id, Request $request)
     {
         Comment::destroy($id);
         return redirect($request->headers->get('referer', '/'));
+    }
+
+    public function stats()
+    {
+        $commentCount=$this->service->getCommentCount();
+        $postCount=$this->service->getPostCount();
+        $userCount=$this->service->getUserCount();
+        $popPost=$this->service->mostPopularPost();
+        return view('admin.admin_stats',compact('commentCount','postCount','userCount','popPost'));
     }
 
 
