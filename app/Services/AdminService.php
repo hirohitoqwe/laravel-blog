@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Jobs\MailSendJob;
 use App\Mail\UserBannedEmail;
 use App\Models\Comment;
 use App\Models\Post;
@@ -12,7 +13,9 @@ use Illuminate\Support\Facades\Mail;
 class AdminService
 {
 
-    public function __construct(private readonly CalculateService $service){}
+    public function __construct(private readonly CalculateService $service)
+    {
+    }
 
     public function postUpdate(Request $request, int $id): \Illuminate\Http\RedirectResponse
     {
@@ -32,9 +35,7 @@ class AdminService
 
     public function userDelete(int $id): \Illuminate\Http\RedirectResponse
     {
-        $user=User::find($id);
-        Mail::to($user->email)->send(new UserBannedEmail($user));
-        User::destroy($id);
+        MailSendJob::dispatch($id);
         return redirect()->route("admin.users");
     }
 
@@ -46,11 +47,11 @@ class AdminService
 
     public function stats()
     {
-        $commentCount=$this->service->getCommentCount();
-        $postCount=$this->service->getPostCount();
-        $userCount=$this->service->getUserCount();
-        $popPost=$this->service->mostPopularPost();
-        return view('admin.admin_stats',compact('commentCount','postCount','userCount','popPost'));
+        $commentCount = $this->service->getCommentCount();
+        $postCount = $this->service->getPostCount();
+        $userCount = $this->service->getUserCount();
+        $popPost = $this->service->mostPopularPost();
+        return view('admin.admin_stats', compact('commentCount', 'postCount', 'userCount', 'popPost'));
     }
 
 
