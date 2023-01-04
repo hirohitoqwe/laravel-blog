@@ -2,10 +2,12 @@
 
 namespace App\Services;
 
+use App\Mail\UserBannedEmail;
 use App\Models\Comment;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class AdminService
 {
@@ -30,6 +32,8 @@ class AdminService
 
     public function userDelete(int $id): \Illuminate\Http\RedirectResponse
     {
+        $user=User::find($id);
+        Mail::to($user->email)->send(new UserBannedEmail($user));
         User::destroy($id);
         return redirect()->route("admin.users");
     }
